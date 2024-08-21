@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* scrollbar.css */
+
+/* Container for the custom scrollbar */
+
+
+ ::-webkit-scrollbar {
+    width: 8px;
+   
+}
+
+::-webkit-scrollbar-track {
+    background: #555;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #121212;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #242424;
+}
+
+
+.shake {
+    animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.2s both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+
+@media (max-width: 500px) {
+    .SIGNUP {
+        height: 80vh;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+} 
+
+
+
+
+
+
+@media (max-width: 786px) {
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        border-top: 1px solid #333;
+        /* Optional border for separation */
+        border-left: none;
+        /* Remove left border */
+        border-right: none;
+        /* Remove right border */
+        border-bottom: none;
+        /* Remove bottom border if needed */
+        z-index: 100;
+        /* Ensure it stays on top */
+    }
+
+    .sidebar .nav {
+        flex-direction: row;
+        /* Align items horizontally */
+        justify-content: space-around;
+        /* Distribute items evenly */
+    }
+
+    .sidebar .nav .nav-item {
+        margin: 0;
+        /* Remove margin between items */
+        padding: 10px;
+        /* Add padding to each item */
+    }
+
+    .notification-container {
+        padding: 0.5rem;
+        /* Add padding to container */
+    }
+
+    .notification-header {
+        font-size: 1.3rem;
+        /* Adjust font size for the header */
+        margin-bottom: 1rem;
+        /* Add space below the header */
+    }
+
+    .notification-item {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .notification-item button {
+        width: 100%;
+        /* Full-width button */
+        margin-top: 0.5rem;
+        /* Space above the button */
+    }
+}
+
+
+
+/* Add this to your main CSS file or inline styles */
+
+@media (max-width: 786px) {
+    .popup-content {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .popup-content textarea {
+        font-size: 0.875rem;
+        /* Adjust font size for better readability */
+    }
+
+    .popup-content button {
+        width: 100%;
+        /* Full-width button for easier tapping */
+    }
+
+    .popup-content label {
+        font-size: 0.8rem;
+    }
+}
+
+
+.post-content {
+    white-space: pre-line;
+    /* This will preserve line breaks and multiple spaces */
+    word-wrap: break-word;
+    /* Ensure long words are wrapped to the next line */
+}

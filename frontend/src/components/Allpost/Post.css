@@ -1,0 +1,11 @@
+/* Add this to your global CSS or a module CSS file */
+.post-content {
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
+}
+.post-content.expanded {
+  max-height: 1000px; /* Adjust this value based on your content */
+}
+.post-content.collapsed {
+  max-height: 150px; /* Adjust this value based on your preview limit */
+}
