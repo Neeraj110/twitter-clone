@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-
+import path from "path";
 import authRouter from "./routes/auth.routes.js";
 import followRouter from "./routes/follow.routes.js";
 import postRouter from "./routes/post.routes.js";
@@ -33,6 +33,24 @@ app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/messages", messageRouter);
 app.use("/api/v1/notification", notificationRouter);
 app.use("/api/v1/users", userRouter);
+
+// --------------------------deployment------------------------------
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
+// --------------------------deployment------------------------------
 
 app.get("/", (req, res) => {
   res.send("hello");
