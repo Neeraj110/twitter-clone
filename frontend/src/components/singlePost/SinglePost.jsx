@@ -135,14 +135,19 @@ function SinglePost({ postId }) {
         </div>
 
         {/* Post Content */}
-        <div className="p-6 space-y-2">
+        <div className="px-4 text-[1.1rem]">
           <ContentSection
             content={currentPost.content}
             contentPreviewLimit={500}
           />
-          {(currentPost.image || currentPost.video) && (
-            <MediaSection image={currentPost.image} video={currentPost.video} />
-          )}
+          <div className="flex items-center justify-center">
+            {(currentPost.image || currentPost.video) && (
+              <MediaSection
+                image={currentPost.image}
+                video={currentPost.video}
+              />
+            )}
+          </div>
         </div>
         <div className="">
           <ActionButtons
@@ -173,7 +178,6 @@ function SinglePost({ postId }) {
           />
         )}
       </div>
-    
     </div>
   );
 }

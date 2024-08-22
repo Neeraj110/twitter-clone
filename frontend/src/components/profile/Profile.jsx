@@ -82,7 +82,7 @@ const Profile = () => {
                 <Link
                   to={`/dashboard/post/${post?._id}`}
                   key={post._id}
-                  className="mb-4 border-b-[1.3px] border-gray-600"
+                  className="mb-4 border-b-[1.3px] border-gray-600 "
                 >
                   <UserAllpost post={post} fetchProfile={fetchProfile} />
                 </Link>

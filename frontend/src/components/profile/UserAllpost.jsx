@@ -57,7 +57,9 @@ const UserAllpost = ({ post, fetchProfile }) => {
       </div>
 
       <ContentSection content={post.content} contentPreviewLimit={500} />
-      <MediaSection image={post.image} video={post.video} />
+      <div className="flex justify-center">
+        <MediaSection image={post.image} video={post.video} />
+      </div>
 
       {showEditPost && <EditPost post={post} onClose={handleEditPostClose} />}
     </div>

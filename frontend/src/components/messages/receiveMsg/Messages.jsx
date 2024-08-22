@@ -38,22 +38,28 @@ function Messages({ message }) {
   }
 
   return (
-    <div className="">
+    <div className={`flex ${fromMe ? "justify-end" : "justify-start"} mb-4`}>
       <div className={`chat ${fromMe ? "chat-end" : "chat-start"}`}>
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full ">
-            <img loading="lazy" alt="User Avatar" src={profilePic} />
+        <div className="chat-image avatar flex items-center justify-between">
+          <div className="w-10 rounded-full overflow-hidden">
+            <img
+              loading="lazy"
+              alt="User Avatar"
+              src={profilePic}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
         <div
-          className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2 `}
+          className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
         >
           <p>{message.text}</p>
           {message.image && (
             <img
               src={message.image}
               alt="Message Attachment"
-              className="my-2 rounded-lg max-w-full h-[10rem]"
+              className="my-2 rounded-lg max-w-full h-auto"
+              style={{ maxWidth: '100%', height: 'auto' }}
             />
           )}
           {message.video && (
@@ -61,6 +67,7 @@ function Messages({ message }) {
               controls
               src={message.video}
               className="my-2 rounded-lg max-w-full h-auto"
+              style={{ maxWidth: '100%', height: 'auto' }}
             >
               Your browser does not support the video tag.
             </video>
@@ -70,7 +77,6 @@ function Messages({ message }) {
           {formattedTime}
         </div>
       </div>
-      <br />
     </div>
   );
 }

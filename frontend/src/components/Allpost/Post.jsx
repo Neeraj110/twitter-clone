@@ -24,9 +24,6 @@ const Post = ({ post, fetchPostsForYou }) => {
 
   const dispatch = useDispatch();
 
-  
-  
-
   const toggleComments = () => {
     setShowComments(!showComments);
   };
@@ -52,7 +49,7 @@ const Post = ({ post, fetchPostsForYou }) => {
   };
 
   return (
-    <div className="bg-black p-4 shadow-md text-white flex flex-col gap-2 justify-center md:px-0 px-5 relative">
+    <div className="bg-black p-2 shadow-md text-white flex flex-col gap-2 justify-center md:px-0 px-5 relative">
       <div className="mb-5 flex items-center justify-between">
         <Link to={`/dashboard/profile/${post?.owner?._id}`}>
           <Avatar
@@ -83,7 +80,9 @@ const Post = ({ post, fetchPostsForYou }) => {
       </div>
       <Link to={`/dashboard/post/${post?._id}`}>
         <ContentSection content={post.content} contentPreviewLimit={500} />
-        <MediaSection image={post.image} video={post.video} />
+        <div className="flex items-center justify-center">
+          <MediaSection image={post.image} video={post.video} />
+        </div>
       </Link>
       <ActionButtons
         isLikedByUser={post.likes.includes(userInfo?._id)}

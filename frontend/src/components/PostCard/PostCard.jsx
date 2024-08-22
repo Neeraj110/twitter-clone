@@ -91,7 +91,7 @@ const PostCard = ({ show, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70 z-50">
-      <div className="bg-black text-white p-5 rounded-[20px]  md:w-full max-w-lg md:mx-4 w-[75%] popup-container relative shadow-[0_0_20px_rgba(255,255,255,0.6)] transition-transform transform">
+      <div className="bg-black text-white md:p-5 p-3 rounded-[20px]  md:w-full  md:mx-4 w-[75%] popup-container relative shadow-[0_0_20px_rgba(255,255,255,0.6)] transition-transform transform">
         <button
           onClick={handleClickClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-white"
@@ -110,7 +110,7 @@ const PostCard = ({ show, onClose }) => {
             ></textarea>
           </div>
           <div className="mb-4 flex flex-col gap-4 px-2 relative">
-            <div className="flex md:flex-col gap-4">
+            <div className="flex flex-col gap-4">
               <label
                 htmlFor="image-input"
                 className="flex items-center space-x-2 cursor-pointer text-white hover:text-blue-500"

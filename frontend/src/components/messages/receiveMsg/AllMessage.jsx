@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import useGetMessages from "../../../slices/coversation/messageApi/getMessage";
 import useListenMessages from "../../../slices/coversation/messageApi/useListenMessage";
 import { useEffect, useRef } from "react";
+import { FiArrowLeft } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const AllMessage = () => {
   const { messages, loading } = useGetMessages();
@@ -22,11 +24,11 @@ const AllMessage = () => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col w-full h-[110vh]">
+    <div className="  flex flex-col w-full h-[110vh]">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-black border-b border-muted p-4 text-white">
-        <div className="flex items-center gap-4">
-          <span className="relative flex shrink-0 overflow-hidden rounded-full w-10 h-10 border">
+      <div className="sticky top-0 z-10 bg-black border-b border-muted p-4 text-white flex items-center justify-between">
+        <div className="flex  gap-4 items-center">
+          <span className="relative flex    shrink-0 overflow-hidden rounded-full w-10 h-10 border">
             <img
               className="aspect-square h-full w-full"
               alt="User Avatar"
@@ -44,6 +46,12 @@ const AllMessage = () => {
             </h1>
           </div>
         </div>
+        <Link
+          to={"/dashboard"}
+          className="bg-white text-black px-4 py-[.5rem] rounded-[100px] md:hidden block"
+        >
+          <FiArrowLeft size={20} />
+        </Link>
       </div>
 
       {/* Messages Container */}
@@ -67,7 +75,7 @@ const AllMessage = () => {
       </div>
 
       {/* Send Message Input */}
-      <div className="sticky md:bottom-0  sm:bottom-0 bottom-10 z-10 bg-black  ">
+      <div className="sticky md:bottom-0  sm:bottom-0 bottom-0 z-10 bg-black  ">
         <SendMessage />
       </div>
     </div>

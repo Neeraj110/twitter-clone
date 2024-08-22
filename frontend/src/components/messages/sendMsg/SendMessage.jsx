@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiImage, FiVideo } from "react-icons/fi";
 import { useSendMessage } from "../../../slices/coversation/messageApi/sendMessage";
+import "./style.css";
 
 function SendMessage() {
   const [text, setText] = useState("");
@@ -21,13 +22,18 @@ function SendMessage() {
     <div className="bg-background p-4 border-t border-muted">
       <form onSubmit={handleSendMessage} className="flex items-center gap-3">
         <input
-          className=" border border-input bg-background text-sm rounded-2xl md:w-[65%] p-2"
+          className="border border-input bg-background text-sm rounded-2xl md:w-[65%] w-auto p-2"
           placeholder="Type your message..."
           value={text}
+          required
           onChange={(e) => setText(e.target.value)}
         />
         <label htmlFor="imageInput" className="cursor-pointer">
-          <FiImage className="text-2xl hover:text-blue-600" />
+          <FiImage
+            className={`text-2xl hover:text-blue-600 ${
+              imageFile ? " text-blue-500" : ""
+            }`}
+          />
           <input
             id="imageInput"
             type="file"
@@ -36,8 +42,12 @@ function SendMessage() {
             className="hidden"
           />
         </label>
-        <label htmlFor="videoInput" className={`cursor-pointer`}>
-          <FiVideo className="text-2xl hover:text-blue-600" />
+        <label htmlFor="videoInput" className="cursor-pointer">
+          <FiVideo
+            className={`text-2xl hover:text-blue-600 ${
+              videoFile ? "text-blue-600 " : ""
+            }`}
+          />
           <input
             id="videoInput"
             type="file"
@@ -47,14 +57,16 @@ function SendMessage() {
           />
         </label>
         <button
-          className="bg-white text-black py-2 rounded-[100px] px-4"
+          className="bg-white text-black py-2 rounded-[100px] px-4 flex items-center"
           type="submit"
           disabled={loading}
         >
-          {/* <FiSend /> */}
-          Send
+          {loading ? (
+            <span className="loader"></span> // Loader spinner
+          ) : (
+            "Send"
+          )}
         </button>
-        <div className=""></div>
       </form>
     </div>
   );

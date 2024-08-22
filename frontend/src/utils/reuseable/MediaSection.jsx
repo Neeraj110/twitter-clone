@@ -6,8 +6,7 @@ const MediaSection = ({ image, video }) => (
       <img
         src={image}
         alt="Post Image"
-        className="w-full h-auto mb-4 rounded-md object-cover"
-        style={{ aspectRatio: "16/9", maxHeight: "400px", objectFit: "cover" }}
+        className="w-[80%] h-[20rem] md:h-[28rem] mb-4 rounded-md object-cover"
       />
     )}
     {video && (
