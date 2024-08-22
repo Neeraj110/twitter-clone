@@ -13,7 +13,6 @@ import {
   setNotifications,
   setUnreadCount,
 } from "./slices/notification/notificationSlice";
-import { toast } from "react-toastify";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -31,11 +30,10 @@ function App() {
         dispatch(setUnreadCount(unread));
       } catch (error) {
         console.log(error);
-        toast.error("Failed to fetch notifications");
       }
     };
     fetchNotifications();
-  }, [dispatch]);
+  }, [dispatch, userInfo]);
 
   return (
     <div className="bg-black">
