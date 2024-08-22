@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
-import NotificationList from "./NotificationItem"; // Corrected import path
+import NotificationList from "./NotificationItem";
 import { useCallback, useEffect } from "react";
 import { getAllNotifications } from "../../slices/notification/notificationApi";
 import {
@@ -29,14 +28,12 @@ function Notification() {
   }, [fetchNotifications]);
 
   return (
-    <div className="pr-4 md:pr-8 h-full bg-black text-white">
+    <div className="pr-4 md:pr-8 h-screen bg-black text-white">
       <div className="border-b border-gray-600 pb-4 mb-4">
-        <h1 className="text-xl md:text-2xl font-bold mt-4">
-          Notifications
-        </h1>
+        <h1 className="text-xl md:text-2xl font-bold mt-4">Notifications</h1>
       </div>
 
-      <div className="overflow-y-auto h-[calc(100%-4rem)] md:h-[calc(100%-5rem)]">
+      <div className="overflow-y-auto  h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] scrollbar-none">
         <NotificationList fetchNotifications={fetchNotifications} />
       </div>
     </div>

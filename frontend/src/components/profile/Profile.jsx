@@ -59,15 +59,7 @@ const Profile = () => {
         handleToggleFollowing={() => handleToggle(setShowFollowing)}
         handleToggleFollowers={() => handleToggle(setShowFollowers)}
       />
-      {showEdit && (
-        <EditProfile
-          show={showEdit}
-          onClose={() => setShowEdit(false)}
-          userInfo={userInfo}
-          refetchProfile={fetchProfile}
-        />
-      )}
-      <div className="mt-5 border-t border-gray-700 w-full max-w-2xl">
+      <div className="mt-5 border-t border-gray-700 w-full ">
         <div className="flex justify-around text-white text-sm md:text-base">
           {["posts", "bookmarks"].map((viewType) => (
             <div
@@ -113,6 +105,15 @@ const Profile = () => {
           onClose={() => setShowFollowers(false)}
           user={userInfo?.followers}
           header="Followers"
+        />
+      )}
+
+      {showEdit && (
+        <EditProfile
+          show={showEdit}
+          onClose={() => setShowEdit(false)}
+          userInfo={userInfo}
+          refetchProfile={fetchProfile}
         />
       )}
     </div>

@@ -6,9 +6,36 @@ import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import Dashboard from "./pages/dashboard/Dashboard";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllNotifications } from "./slices/notification/notificationApi";
+import {
+  setNotifications,
+  setUnreadCount,
+} from "./slices/notification/notificationSlice";
+import { toast } from "react-toastify";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const { data } = await getAllNotifications();
+        dispatch(setNotifications(data));
+        const unread = data.filter(
+          (notification) => notification.unread
+        ).length;
+        dispatch(setUnreadCount(unread));
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to fetch notifications");
+      }
+    };
+    fetchNotifications();
+  }, [dispatch]);
 
   return (
     <div className="bg-black">

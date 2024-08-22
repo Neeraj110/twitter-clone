@@ -14,7 +14,7 @@ const UserProfileCard = ({
   handleToggleFollowers,
 }) => {
   return (
-    <div className="text-white min-h-screen bg-black w-full border-gray-600">
+    <div className="text-white  bg-black w-full border-gray-600">
       <div
         className={`relative border-b-[1.2px] border-gray-700 ${
           user?.coverImg ? "" : "bg-blue-500"

@@ -3,28 +3,6 @@
 @tailwind utilities;
 
 
-/* scrollbar.css */
-
-/* Container for the custom scrollbar */
-
-
- ::-webkit-scrollbar {
-    width: 8px;
-   
-}
-
-::-webkit-scrollbar-track {
-    background: #555;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #121212;
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #242424;
-}
 
 
 .shake {
@@ -64,7 +42,7 @@
     60% {
         transform: translate3d(4px, 0, 0);
     }
-} 
+}
 
 
 
@@ -131,34 +109,22 @@
 }
 
 
+/* Tailwind config or custom CSS file */
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
 
-/* Add this to your main CSS file or inline styles */
-
-@media (max-width: 786px) {
-    .popup-content {
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    .popup-content textarea {
-        font-size: 0.875rem;
-        /* Adjust font size for better readability */
-    }
-
-    .popup-content button {
-        width: 100%;
-        /* Full-width button for easier tapping */
-    }
-
-    .popup-content label {
-        font-size: 0.8rem;
-    }
+.scrollbar-none {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 
 .post-content {
     white-space: pre-line;
-    /* This will preserve line breaks and multiple spaces */
     word-wrap: break-word;
-    /* Ensure long words are wrapped to the next line */
+
 }

@@ -36,7 +36,7 @@ function NotificationItem({ notification, fetchNotifications }) {
   };
 
   return (
-    <div className="border-b-2">
+    <div className="border-b-2 pb-3">
       <div
         className={`md:p-4 p-2 rounded-md mt-5 shadow-md ${
           notification?.unread ? "bg-black" : "bg-gray-700"
@@ -53,7 +53,9 @@ function NotificationItem({ notification, fetchNotifications }) {
             className="w-10 h-10 rounded-full"
           />
           <div className="flex-1">
-            <p className="md:text-lg font-semibold text-white">{notification?.tag}</p>
+            <p className="md:text-lg font-semibold text-white">
+              {notification?.tag}
+            </p>
             <p className="text-gray-300">{notification?.message}</p>
             <p className="text-sm text-gray-400">
               {new Date(notification?.createdAt).toLocaleString()}
@@ -64,11 +66,13 @@ function NotificationItem({ notification, fetchNotifications }) {
           <button
             onClick={() => handleToggleRead(notification?._id)}
             className={`px-3 py-1 rounded-md ${
-              notification?.unread ? "bg-blue-500 text-white" : "bg-gray-500 text-white"
+              notification?.unread
+                ? "bg-blue-500 text-white"
+                : ""
             }`}
             disabled={loading}
           >
-            {notification?.unread ? "Mark as Read" : "Read"}
+            {notification?.unread ? "Mark as Read" :""}
           </button>
           <button
             onClick={() => handleDeleteNotification(notification?._id)}
@@ -79,7 +83,6 @@ function NotificationItem({ notification, fetchNotifications }) {
           </button>
         </div>
       </div>
-      <div className="mt-[2.1rem]"></div>
     </div>
   );
 }
@@ -104,7 +107,7 @@ export default function NotificationList({ fetchNotifications }) {
   }, [notificationsFromStore]);
 
   return (
-    <div className="p-4">
+    <div className="flex flex-col bg-black md:mb-0 mb-[2.5rem]">
       {notifications.length > 0 ? (
         notifications.map((notification) => (
           <NotificationItem
@@ -114,7 +117,7 @@ export default function NotificationList({ fetchNotifications }) {
           />
         ))
       ) : (
-        <p className="text-gray-400 text-center">No notifications</p>
+        <p className="text-white text-center ">No Notifications !!</p>
       )}
     </div>
   );
