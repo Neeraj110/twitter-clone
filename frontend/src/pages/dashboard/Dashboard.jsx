@@ -55,7 +55,7 @@ function Dashboard() {
     };
 
     fetchNotifications();
-  }, [dispatch, setNotifications, setUnreadCount]);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-row h-full">

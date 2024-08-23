@@ -43,6 +43,7 @@ const UserCard = ({ user }) => {
       <Link to={`/dashboard/profile/${user?._id}`}>
         <div className="flex items-center gap-3">
           <img
+            loading="lazy"
             src={
               user.avatar
                 ? user.avatar

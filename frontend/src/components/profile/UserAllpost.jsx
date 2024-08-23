@@ -26,7 +26,7 @@ const UserAllpost = ({ post, fetchProfile }) => {
   };
 
   return (
-    <div className="bg-black p-4 shadow-md text-white flex flex-col gap-2 justify-center md:px-0 px-5 relative">
+    <div className="bg-black p-4 shadow-md text-white flex flex-col gap-2 justify-center md:px-0 px-5 relative border-b-[1.5px] border-gray-600 mb-[1.2rem]">
       <div className="mb-5 flex items-center justify-between">
         <Link to={`/dashboard/profile/${post?.owner?._id}`}>
           <Avatar

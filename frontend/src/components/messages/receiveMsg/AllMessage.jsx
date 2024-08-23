@@ -24,11 +24,14 @@ const AllMessage = () => {
   }, [messages]);
 
   return (
-    <div className="  flex flex-col w-full h-[110vh]">
+    <div className="  flex flex-col w-full h-[100vh]">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-black border-b border-muted p-4 text-white flex items-center justify-between">
-        <div className="flex  gap-4 items-center">
-          <span className="relative flex    shrink-0 overflow-hidden rounded-full w-10 h-10 border">
+        <Link
+          to={`/dashboard/profile/${selectedConversation._id}`}
+          className="flex  gap-4 items-center"
+        >
+          <span className="relative flex  shrink-0 overflow-hidden rounded-full w-10 h-10 border">
             <img
               className="aspect-square h-full w-full"
               alt="User Avatar"
@@ -45,7 +48,7 @@ const AllMessage = () => {
               {selectedConversation?.name}
             </h1>
           </div>
-        </div>
+        </Link>
         <Link
           to={"/dashboard"}
           className="bg-white text-black px-4 py-[.5rem] rounded-[100px] md:hidden block"

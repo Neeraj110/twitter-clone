@@ -30,6 +30,7 @@ const UserList = ({ conversation, emoji, lastIdx, onClose }) => {
         className={`avatar ${isOnline ? "online" : ""} w-[2.1rem] h-[2.1rem]`}
       >
         <img
+           loading="lazy"
           className="h-full w-full rounded-full"
           alt="Image"
           src={

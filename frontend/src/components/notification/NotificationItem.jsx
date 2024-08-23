@@ -44,6 +44,7 @@ function NotificationItem({ notification, fetchNotifications }) {
       >
         <div className="flex items-center w-full md:w-auto space-x-4">
           <img
+             loading="lazy"
             src={
               notification?.sender?.avatar
                 ? notification?.sender?.avatar

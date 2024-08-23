@@ -87,7 +87,7 @@ const UserProfile = () => {
         handleToggleFollowers={() => handleToggle(setShowFollowers)}
       />
       <div className="mt-8   w-full  h-[100%] px-2">
-        <div className="py-3  text-[1.2rem] hover:underline text-center hover:text-gray-700 border-t-[1.3px] border-gray-700">
+        <div className="py-3 text-[1.2rem] hover:underline text-center hover:text-gray-700 border-t-[1.1px] border-gray-500">
           Posts
         </div>
       </div>
@@ -98,7 +98,7 @@ const UserProfile = () => {
               <Link
                 to={`/dashboard/post/${post._id}`}
                 key={post._id}
-                className="mb-4 border-b-[1.3px] border-gray-600"
+                className="mb-4 "
               >
                 <UserAllpost post={post} fetchProfile={fetchProfile} />
               </Link>
