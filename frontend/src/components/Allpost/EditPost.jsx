@@ -7,7 +7,9 @@ import { useDispatch } from "react-redux";
 import { setPosts } from "../../slices/post/postSlice";
 
 function EditPost({ onClose, post }) {
-  const [postContent, setPostContent] = useState(post.content || "");
+  console.log(post);
+  const [postContent, setPostContent] = useState(post?.content || "");
+
   const [imageFile, setImageFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
   const [loading, setLoading] = useState(false);

@@ -173,7 +173,7 @@ function SinglePost({ postId }) {
         )}
         {showEditPost && (
           <EditPost
-            currentPost={currentPost}
+            post={currentPost}
             onClose={() => setShowEditPost(false)}
           />
         )}
