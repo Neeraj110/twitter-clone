@@ -18,6 +18,7 @@ const authSlice = createSlice({
       state.userInfo = null;
       sessionStorage.removeItem("userInfo");
       sessionStorage.removeItem("posts");
+      sessionStorage.removeItem("notifications");
     },
   },
 });
