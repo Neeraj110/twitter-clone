@@ -112,7 +112,7 @@ const UserProfile = () => {
         <FollowingPopup
           onClose={() => setShowFollowing(false)}
           user={user?.following}
-          header="FollowingUsers"
+          header="Following"
         />
       )}
       {showFollowers && (

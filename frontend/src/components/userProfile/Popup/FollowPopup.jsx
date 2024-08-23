@@ -11,7 +11,7 @@ const FollowPopup = ({ onClose, user, header }) => {
       onClick={onClose}
     >
       <div
-        className="bg-black text-white p-5 rounded-[20px] shadow-lg mx-4  relative min-h-[60%] md:min-w-[45%] min-w-[58%]  overflow-y-auto"
+        className="bg-black text-white p-5 rounded-[20px] shadow-lg mx-4  relative min-h-[60%] md:w-[42%] w-[60%]  overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center pb-[1vw]">

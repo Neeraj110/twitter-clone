@@ -97,7 +97,7 @@ const Profile = () => {
         <FollowingPopup
           onClose={() => setShowFollowing(false)}
           user={userInfo?.following}
-          header="FollowingUsers"
+          header="Following"
         />
       )}
       {showFollowers && (

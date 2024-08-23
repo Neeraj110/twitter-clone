@@ -2,7 +2,6 @@
 import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-
 /* eslint-disable react/prop-types */
 const FollowPopup = ({ onClose, user, header }) => {
   return (
@@ -11,14 +10,14 @@ const FollowPopup = ({ onClose, user, header }) => {
       onClick={onClose}
     >
       <div
-        className="bg-black text-white p-5 rounded-[20px] shadow-lg mx-4  relative min-h-[60%] md:min-w-[45%] min-w-[58%]  overflow-y-auto"
+        className="bg-black text-white p-4 rounded-[20px] shadow-lg mb-4  relative min-h-[60%] md:w-[42%] w-[60%]  overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center pb-[1vw]">
           <h2 className="text-xl font-bold">{header}</h2>
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-white  p-3 rounded-full  transition-colors duration-200 ease-in-out"
+            className="absolute top-4 right-4 text-white p-2 rounded-full  transition-colors duration-200 ease-in-out"
             aria-label="Close"
           >
             <FaTimes className="w-5 h-5" />
