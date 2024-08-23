@@ -58,16 +58,16 @@ function Messages({ message }) {
             <img
               src={message.image}
               alt="Message Attachment"
-              className="my-2 rounded-lg max-w-full h-auto"
-              style={{ maxWidth: '100%', height: 'auto' }}
+              className="my-2 rounded-lg md:w-[20rem] w-[15rem] h-auto"
+              // style={{ maxWidth: '100%', height: 'auto' }}
             />
           )}
           {message.video && (
             <video
               controls
               src={message.video}
-              className="my-2 rounded-lg max-w-full h-auto"
-              style={{ maxWidth: '100%', height: 'auto' }}
+              className="my-2 rounded-lg md:w-[20rem] w-[15rem] h-auto"
+              // style={{ maxWidth: '100%', height: 'auto' }}
             >
               Your browser does not support the video tag.
             </video>

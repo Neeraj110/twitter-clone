@@ -10,7 +10,7 @@ import Post from "../models/post.model.js";
 
 const options = {
   httpOnly: true,
-  secure: false,
+  secure: true,
   sameSite: "strict",
   maxAge: 24 * 60 * 60 * 1000, // 1 day
 };
