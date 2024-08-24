@@ -91,7 +91,7 @@ const PostCard = ({ show, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70 z-50">
-      <div className="bg-black text-white md:p-5 p-3 rounded-[20px]  md:w-full  md:mx-4 w-[75%] popup-container relative shadow-[0_0_20px_rgba(255,255,255,0.6)] transition-transform transform">
+      <div className="bg-black text-white md:p-5 p-3 rounded-[20px]  md:w-[50%]  md:mx-4 w-[75%] popup-container relative shadow-[0_0_20px_rgba(255,255,255,0.6)] transition-transform transform">
         <button
           onClick={handleClickClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-white"
