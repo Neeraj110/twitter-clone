@@ -19,7 +19,7 @@ function Messages({ message }) {
     if (!message) return;
 
     // Update derived states
-    const isFromMe = message.senderId === userInfo?._id;
+    const isFromMe = message.senderId === userInfo?._id
     const pic = isFromMe
       ? userInfo.avatar ||
         `https://eu.ui-avatars.com/api/?name=${userInfo.name}`
