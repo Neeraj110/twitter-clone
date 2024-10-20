@@ -14,17 +14,38 @@ dotenv.config();
 
 const app = express();
 
+// app.use(
+//   cors({
+//     // origin: process.env.CORS_ORIGIN,
+//     origin: [
+//       "https://twitter-clone-nine-lilac.vercel.app",
+//       "http://localhost:5173",
+//     ],
+//     credentials: true,
+//     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS", "PUT"],
+//   })
+// );
+
 app.use(
   cors({
-    // origin: process.env.CORS_ORIGIN,
-    origin: [
-      "https://twitter-clone-nine-lilac.vercel.app",
-      " http://localhost:5173",
-    ],
+    origin: function (origin, callback) {
+      if (
+        !origin ||
+        [
+          "http://localhost:5173",
+          "https://twitter-clone-nine-lilac.vercel.app",
+        ].includes(origin)
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS", "PUT"],
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
