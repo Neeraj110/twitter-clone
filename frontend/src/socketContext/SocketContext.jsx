@@ -14,8 +14,9 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (userInfo) {
-      // const newSocket = io("http://localhost:8000", {
-      const newSocket = io("https://twitter-clone-329s.onrender.com", {
+      const newSocket = io(import.meta.VITE_SERVER_URI, {
+        // const newSocket = io("http://localhost:8000", {
+        // const newSocket = io("https://twitter-clone-329s.onrender.com", {
         query: {
           userId: userInfo._id,
         },

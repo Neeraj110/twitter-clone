@@ -11,15 +11,19 @@ const useGetMessages = () => {
   );
   const dispatch = useDispatch();
 
+
+  
   useEffect(() => {
     const getMessages = async () => {
       setLoading(true);
       try {
         if (!selectedConversation || !selectedConversation._id) {
-          return; // Exit early if selectedConversation or _id is null or undefined
+          return;
         }
         const res = await axios.get(
-          `/api/v1/messages/get-msg/${selectedConversation._id}`
+          `${import.meta.env.VITE_API_URL}/api/v1/messages/get-msg/${
+            selectedConversation._id
+          }`
         );
 
         dispatch(setMessages(res.data.data));

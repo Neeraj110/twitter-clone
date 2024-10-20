@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "/api/v1",
+  baseURL: "",
   headers: {
     "Content-Type": "application/json",
   },
@@ -9,6 +9,8 @@ const axiosInstance = axios.create({
 });
 
 export const followUser = async (id) => {
-  const response = await axiosInstance.get(`/follow/${id}`);
+  const response = await axiosInstance.get(
+    `${import.meta.env.VITE_API_URL}/api/v1/follow/${id}`
+  );
   return response.data;
 };

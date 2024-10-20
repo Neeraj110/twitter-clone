@@ -13,6 +13,8 @@ function MsgSideBar({ onClose }) {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
 
+
+  
   const filteredConversations = conversations.filter((conversation) =>
     conversation.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
