@@ -3,20 +3,20 @@ import { useState } from "react";
 import UserList from "./UserList";
 import { useDispatch } from "react-redux";
 import { setSelectedConversation } from "../../../slices/coversation/conversationSlice";
-import { getUserInfo } from "../../../slices/coversation/messageApi/getUserInfo";
+import getUserInfo from "../../../slices/coversation/messageApi/getUserInfo";
 import { getRandomEmoji } from "../../../utils/emoji";
 import { FiArrowLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 function MsgSideBar({ onClose }) {
+  // Call the custom hook properly inside the component
   const { conversations } = getUserInfo();
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
 
-
-  
+  // Filter conversations based on search term
   const filteredConversations = conversations.filter((conversation) =>
-    conversation.name.toLowerCase().includes(searchTerm.toLowerCase())
+    conversation?.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleConversationSelect = (conversation) => {
@@ -25,7 +25,7 @@ function MsgSideBar({ onClose }) {
 
   return (
     <div className="flex flex-col h-screen bg-background text-foreground border-r border-gray-600 text-white overflow-auto">
-      <div className="sticky flex  items-center gap-3 top-0 z-10 bg-background p-3">
+      <div className="sticky flex items-center gap-3 top-0 z-10 bg-background p-3">
         <input
           className="h-10 w-[80%] md:w-full rounded-md border border-gray-300 bg-background px-4 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Search users...."

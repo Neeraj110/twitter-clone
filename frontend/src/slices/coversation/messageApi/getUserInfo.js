@@ -3,16 +3,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api/v1`,
-  headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
-});
-
-// for Sidebar to display user info
-const getUserInfo = () => {
+// Custom hook to fetch user info and conversations
+const useGetUserInfo = () => {
   const [loading, setLoading] = useState(false);
   const [conversations, setConversations] = useState([]);
 
@@ -20,15 +12,25 @@ const getUserInfo = () => {
     const getConversations = async () => {
       setLoading(true);
       try {
-        const res = await axiosInstance.get("/users/info");
-        const data = res.data;
-        if (data.error) {
-          throw new Error(data.error);
-        }
+        const res = await axios.get(`/api/v1/users/info`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
 
+        const data = res.data;
+
+        // Skip the array check temporarily to debug
         setConversations(data);
       } catch (error) {
-        toast.error(error.message);
+        if (error.response) {
+          toast.error(`Error: ${error.response.data.message || error.message}`);
+        } else if (error.request) {
+          toast.error("Network error. Please try again.");
+        } else {
+          toast.error(`Error: ${error.message}`);
+        }
       } finally {
         setLoading(false);
       }
@@ -37,7 +39,9 @@ const getUserInfo = () => {
     getConversations();
   }, []);
 
+  // Dependency array: empty, so effect runs once on mount
+
   return { loading, conversations };
 };
 
-export { getUserInfo };
+export default useGetUserInfo;

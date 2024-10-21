@@ -8,7 +8,7 @@ dotenv.config();
 const server = http.createServer(app);
 export const io = new Server(server, {
   cors: {
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS", "PUT"],
   },
 });

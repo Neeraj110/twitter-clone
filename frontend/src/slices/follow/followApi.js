@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 
 export const followUser = async (id) => {
   const response = await axiosInstance.get(
-    `${import.meta.env.VITE_API_URL}/api/v1/follow/${id}`
+    `/api/v1/follow/${id}`
   );
   return response.data;
 };

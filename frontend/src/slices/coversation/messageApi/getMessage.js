@@ -11,8 +11,6 @@ const useGetMessages = () => {
   );
   const dispatch = useDispatch();
 
-
-  
   useEffect(() => {
     const getMessages = async () => {
       setLoading(true);
@@ -20,15 +18,37 @@ const useGetMessages = () => {
         if (!selectedConversation || !selectedConversation._id) {
           return;
         }
+
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/v1/messages/get-msg/${
-            selectedConversation._id
-          }`
+          `/api/v1/messages/get-msg/${selectedConversation._id}`,
+          {
+            withCredentials: true, // Include this if needed
+          }
         );
 
-        dispatch(setMessages(res.data.data));
+        // Assuming res.data.data contains the messages
+        if (res.data && res.data.data) {
+          dispatch(setMessages(res.data.data));
+        } else {
+          throw new Error("No messages found");
+        }
       } catch (error) {
-        toast.error(error.message);
+        if (error.response) {
+          // Server responded with a status other than 2xx
+          if (error.response.status === 401) {
+            toast.error("Unauthorized access. Please log in.");
+          } else {
+            toast.error(
+              `Error: ${error.response.data.message || error.message}`
+            );
+          }
+        } else if (error.request) {
+          // Request was made but no response received
+          toast.error("Network error. Please try again.");
+        } else {
+          // Something else happened
+          toast.error(`Error: ${error.message}`);
+        }
         console.log(error);
       } finally {
         setLoading(false);
