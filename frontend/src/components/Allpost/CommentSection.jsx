@@ -74,7 +74,7 @@ const CommentSection = ({
 
   return (
     <div
-      className="inset-0 fixed flex items-center justify-center bg-gray-800 bg-opacity-70 z-50 w-full h-full"
+      className="inset-0 fixed flex items-center justify-center bg-gray-800 bg-opacity-70 z-50 w-full h-full mb-9"
       onClick={onClose}
     >
       <div
@@ -109,7 +109,7 @@ const CommentSection = ({
           </button>
         </form>
 
-        <div className="mt-4">
+        <div className="mt-4 mb-4">
           {Array.isArray(showComments) && showComments.length > 0 ? (
             showComments.map((comment) => (
               <div

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import { register } from "../../slices/user/userApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +18,7 @@ function RegisterPage() {
     setIsLoading(true);
     try {
       const formData = { name, email, username, password };
-      const { data } = await register(formData);
-      console.log("Register Response:", data);
+      await register(formData);
       setShowOTP(true);
       toast.success("OTP Sent to your email");
       setIsLoading(false);

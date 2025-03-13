@@ -20,6 +20,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!userInfo) return;
     const fetchNotifications = async () => {
       try {
         const { data } = await getAllNotifications();

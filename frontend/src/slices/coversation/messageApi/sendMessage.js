@@ -33,12 +33,7 @@ const useSendMessage = () => {
       );
 
       const data = res.data.data;
-
-      // if (Array.isArray(messages)) {
       dispatch(setMessages([...messages, data]));
-      // } else {
-      //   dispatch(setMessages([data]));
-      // }
     } catch (error) {
       toast.error(error.message);
       console.log(error);

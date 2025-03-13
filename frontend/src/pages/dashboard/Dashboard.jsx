@@ -22,6 +22,7 @@ function Dashboard() {
   const [showPopup, setShowPopup] = useState(false);
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const dispatch = useDispatch();
+  
 
   const handleAddPostClick = () => {
     setShowPopup(true);
@@ -43,7 +44,8 @@ function Dashboard() {
     const fetchNotifications = async () => {
       try {
         const { data } = await getAllNotifications();
-        dispatch(setNotifications(data));
+
+        dispatch(setNotifications(data || []));
         const unread = data.filter(
           (notification) => notification.unread
         ).length;

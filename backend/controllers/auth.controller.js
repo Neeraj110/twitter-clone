@@ -48,12 +48,9 @@ export const register = asyncHandler(async (req, res) => {
 
     await sendMail({
       email,
+      name,
       subject: "Welcome to TwiLite! Confirm Your Account",
-      message: `Hi ${name},
-      
-      To get started and confirm your account, please use the verification code below:
-
-      Verification Code: ${OTP}`,
+      otp: OTP,
     });
 
     user = new User({
@@ -69,7 +66,7 @@ export const register = asyncHandler(async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, null, "OTP sent to your email"));
   } catch (error) {
-    console.error("Error in register:", error); // Log the error
+    console.error("Error in register:", error);
     return res
       .status(500)
       .json(
@@ -88,7 +85,7 @@ export const verifyOTP = asyncHandler(async (req, res) => {
       throw new ApiError(400, "Invalid OTP");
     }
 
-    user.isverify = true; // Mark user as verified
+    user.isverify = true;
     await user.save();
 
     const { accessToken } = await generateAccessTokens(user._id);
@@ -660,25 +657,6 @@ export const getUserById = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid user id");
   }
 });
-
-// export const getMyBookmarks = async (req, res) => {
-//   try {
-//     const userId = req.user._id;
-//     const user = await User.findById(userId);
-//     const posts = [];
-
-//     for (let i = 0; i < user.bookmarks.length; i++) {
-//       const bookmark = await Post.findById(user.bookmarks[i]).populate(
-//         "likes comments.user owner"
-//       );
-//       posts.push(bookmark);
-//     }
-
-//     res.status(200).json(new ApiResponse(200, posts, "Bookmarks fetched"));
-//   } catch (error) {
-//     throw new ApiError(400, error.message);
-//   }
-// };
 
 export const getMyBookmarks = async (req, res) => {
   try {

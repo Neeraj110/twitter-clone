@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: `/api/v1`,
+  baseURL: `http://localhost:8000/api/v1`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 export const getAllNotifications = async () => {
   const response = await axiosInstance.get("/notification/all-notifications");
   sessionStorage.setItem("notifications", JSON.stringify(response.data));
+
   return response.data;
 };
 
