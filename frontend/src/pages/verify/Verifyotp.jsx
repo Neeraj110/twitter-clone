@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { setCredentials } from "../../slices/user/authSlice";
 
-function OTPVerification({ onVerify, onClose }) {
+function OTPVerification({ onVerify, onClose, email }) {
   const [otp, setOtp] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function OTPVerification({ onVerify, onClose }) {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const formData = { otp };
+      const formData = { otp, email };
       const { data } = await verifyOTP(formData);
       onVerify(otp);
       dispatch(setCredentials(data));
@@ -48,7 +48,7 @@ function OTPVerification({ onVerify, onClose }) {
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               required
-              className="block text-black w-full px-3 py-2 border border-gray-500 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block text-white w-full px-3 py-2 border border-gray-500 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
           <button

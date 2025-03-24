@@ -24,8 +24,6 @@ const generateAccessTokens = async (userId) => {
   }
 };
 
-let OTP, user;
-
 export const register = asyncHandler(async (req, res) => {
   try {
     const { name, username, email, password } = req.body;
@@ -34,37 +32,67 @@ export const register = asyncHandler(async (req, res) => {
       throw new ApiError(400, "All fields are required");
     }
 
-    const existingUser = await User.findOne({
-      $or: [{ username }, { email }],
-    });
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
+      if (existingUser.isverify) {
+        return res
+          .status(400)
+          .json(
+            new ApiResponse(400, null, "User already exists and is verified")
+          );
+      } else {
+        const otp = generateOTP();
+        existingUser.name = name;
+        existingUser.username = username;
+        existingUser.password = password;
+        existingUser.otp = otp;
+        await existingUser.save();
+
+        await sendMail({
+          email,
+          name,
+          subject: "Welcome to TwiLite! Confirm Your Account",
+          otp,
+        });
+
+        return res
+          .status(200)
+          .json(
+            new ApiResponse(
+              200,
+              null,
+              "New OTP sent to your email for verification"
+            )
+          );
+      }
+    } else {
+      const otp = generateOTP();
+      const user = new User({
+        email,
+        password, // Hash this in production
+        name,
+        username,
+        followers: [],
+        following: [],
+        otp,
+        isverify: false, // Set to false by default
+      });
+
+      await user.save();
+
+      // Send OTP email
+      await sendMail({
+        email,
+        name,
+        subject: "Welcome to TwiLite! Confirm Your Account",
+        otp,
+      });
+
       return res
-        .status(400)
-        .json(new ApiResponse(400, null, "User already exists"));
+        .status(200)
+        .json(new ApiResponse(200, null, "OTP sent to your email"));
     }
-
-    OTP = generateOTP();
-
-    await sendMail({
-      email,
-      name,
-      subject: "Welcome to TwiLite! Confirm Your Account",
-      otp: OTP,
-    });
-
-    user = new User({
-      email,
-      password,
-      name,
-      username,
-      followers: [],
-      following: [],
-    });
-
-    return res
-      .status(200)
-      .json(new ApiResponse(200, null, "OTP sent to your email"));
   } catch (error) {
     console.error("Error in register:", error);
     return res
@@ -76,16 +104,22 @@ export const register = asyncHandler(async (req, res) => {
 });
 
 // ------------------------ Verify OTP ------------------------//
-
 export const verifyOTP = asyncHandler(async (req, res) => {
   try {
-    const { otp } = req.body;
+    const { email, otp } = req.body;
+    console.log(email, otp);
 
-    if (otp !== OTP) {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new ApiError(400, "User not found");
+    }
+
+    if (user.otp !== otp) {
       throw new ApiError(400, "Invalid OTP");
     }
 
     user.isverify = true;
+    user.otp = undefined;
     await user.save();
 
     const { accessToken } = await generateAccessTokens(user._id);
@@ -104,43 +138,54 @@ export const verifyOTP = asyncHandler(async (req, res) => {
 export const forgotPassword = asyncHandler(async (req, res) => {
   try {
     const { email } = req.body;
-    OTP = generateOTP();
+    console.log(email);
+    
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new ApiError(400, "User not found");
+    }
+
+    const otp = generateOTP();
+    user.otp = otp;
+    await user.save();
 
     await sendMail({
       email,
-      subject: "Reset password",
-      message: ` 
-       We received a request to reset your  password. Use the verification code below to proceed with resetting your password: 
-
-      Verification Code: ${OTP}
-`,
+      subject: "Reset Your TwiLite Password",
+      message: `
+        <p>We received a request to reset your password. Use the verification code below to proceed:</p>
+        <div style="text-align: center;">
+          <span style="font-size: 24px; color: #28a745; font-weight: bold; letter-spacing: 2px;">${otp}</span>
+        </div>
+        <p>If you didn’t request this, you can safely ignore this email.</p>
+      `,
     });
 
     return res
       .status(200)
-      .json(new ApiResponse(200, null, "otp sent to your email"));
+      .json(new ApiResponse(200, null, "OTP sent to your email"));
   } catch (error) {
-    throw new ApiError(400, error.message);
+    throw new ApiError(400, error.message || "Something went wrong");
   }
 });
-
 // ------------------------ Reset Password ------------------------//
 
 export const resetPassword = asyncHandler(async (req, res) => {
   try {
     const { email, otp, newPassword } = req.body;
 
-    if (otp !== OTP) {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new ApiError(400, "User not found");
+    }
+
+    if (user.otp !== otp) {
       throw new ApiError(400, "Invalid OTP");
     }
 
-    const user = await User.findOne({ email }).select("-password");
-
-    if (!user) {
-      throw new ApiError(400, "User with this email does not exist");
-    }
-
     user.password = newPassword;
+    user.otp = undefined;
     await user.save({ validateBeforeSave: false });
 
     const { accessToken } = await generateAccessTokens(user._id);

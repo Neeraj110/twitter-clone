@@ -77,6 +77,7 @@ const userSchema = new mongoose.Schema(
         ref: "Post",
       },
     ],
+    otp: String,
   },
   { timestamps: true }
 );

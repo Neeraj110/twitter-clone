@@ -40,7 +40,7 @@ function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-black md:p-0 p-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-black md:p-0 p-4 pt-5 ">
       <div className="mx-auto w-full max-w-md rounded-lg border p-8 shadow-lg">
         <div>
           <div className="space-y-1 text-center">
@@ -139,7 +139,7 @@ function RegisterPage() {
         </div>
       </div>
       {showOTP && (
-        <OTPVerification onVerify={handleVerify} onClose={handleClose} />
+        <OTPVerification onVerify={handleVerify} onClose={handleClose} email={email}/>
       )}
     </div>
   );

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { login } from "../../slices/user/userApi";
 import { setCredentials } from "../../slices/user/authSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 function LoingPage() {
   const [email, setEmail] = useState("");
@@ -74,6 +75,12 @@ function LoingPage() {
                 className="block w-full px-3 py-2 border border-gray-500 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
             </div>
+            <Link
+              to="/reset-password"
+              className="pt-[1rem] text-sm text-blue-500 hover:text-blue-700"
+            >
+              Forgot your password?
+            </Link>
             <button
               type="submit"
               className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
