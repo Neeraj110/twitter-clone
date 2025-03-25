@@ -55,7 +55,6 @@ function Dashboard() {
       } catch (error) {
         if (!mounted) return;
         console.error("Notification fetch error:", error);
-        toast.error("Failed to fetch notifications");
       }
     };
 
